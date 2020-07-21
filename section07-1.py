@@ -50,7 +50,7 @@ user2.user_info_p()
 
 print(id(user1)) # id 메모리의 주소값 출력
 print(id(user2))
-print(user1.__dict__) #네임스페이스출력 __dict__
+print(user1.__dict__) # 네임스페이스출력 __dict__
 print(user2.__dict__)
 
 # 예제 2 
