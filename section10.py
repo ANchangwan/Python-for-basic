@@ -81,7 +81,7 @@ name = ['Kim', 'Lee','Park']
 try:
     z='kim' # cho 예외 발생
     x = name.index(z)
-    print('{} Found it! in name'.format(z, x+1))
+    print('{} Found it! {} in name'.format(z, x+1))
 except ValueError: # 어떤 에러가 발생할지 모를 때는 except로 두기
     print('Not found it! - Occurred ValueError')
 else: # 정상적인 실행만 수행
