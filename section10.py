@@ -136,7 +136,24 @@ except Exception as f:
 else:
     print("ok!")
 
+# Exception 클래스 상속을 이용한 예외처리
 
+class MyError(Exception): # 예외처리 메시지를 만들 수 있음
+    def __str__(self):
+        return '오류가 발생했습니다.'
+
+def say_nick(nick):
+    if nick == 'hi':
+        raise MyError()
+    print(nick)
+
+
+try:
+    say_nick('hello')
+    say_nick('hi')
+
+except MyError as e:
+    print(ellipsis)
 
 
 
