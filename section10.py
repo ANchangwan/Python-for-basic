@@ -30,7 +30,7 @@ print(x[0])
 # print(x[3]) #예외 발생
 
 
-# KeyError
+#  KeyError
 
 dic = {'name': 'kim', 'Age': 33, 'City': 'Seoul'}
 #print(dic['hobby'])
