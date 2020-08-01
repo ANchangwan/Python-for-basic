@@ -19,6 +19,43 @@ print('sqlite3.sqite_version : ', sqlite3.sqlite_version)
 
 # DB 생성 & Auto Commit(Rollback)
 
+conn = sqlite3.connect('C:/python_basic/resource/database.db',isolation_level=None)
 
+# Coursor
+c = conn.cursor()
+print('Cursor Type : ',type(c))
+
+# 데이블 생성(Data Type : TEXT, NUMERIC INTEGER REAL BLOB)
+
+c. execute("CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY, username text, email text , \
+phone text, website text, regdate text)")
+
+
+# 데이터 삽입
+c. execute("INSERT INTO users VALUES(1, 'Kim','ssdii44@naver.com','010-0000-0000','ssdii44.com', ?)", (nowDatetime,))
+c.execute("INSERT INTO users(id, username, email, phone, website, regdate) VALUES(?,?,?,?,?,?)",(2,'Park','Park@daum.net','010-1111-1111','Park.com',nowDatetime))
+
+# Many 삽입(튜플, 리스트)
+userList = (
+    (3,'Lee','Lee@naver.com','010-2222-2222','Lee.com', nowDatetime),
+    (4, 'Cho','Cho@daum.net','010-3333-3333','Cho.com', nowDatetime),
+    (5, 'Yoo','Yoo@google. com','010-4444-4444','Yoo.net', nowDatetime)
+)
+ 
+c.executemany("INSERT INTO users(id, username, email, phone, website, regdate) VALUES (?,?,?,?,?,?)", userList)
+
+# 데이터 삭제
+#conn.execute("DELETE FROM users")
+#print("users db deleted : ", conn.execute("DELETE FROM users").rowcount)
+
+# 커밋 : isolation_level = None 일 경우 자동 반영(오토커밋)
+# conn.commit 즉시반영
+
+
+# 롤백
+# conn.rollback()
+
+# 접속 해제
+#conn.close()
 
 
