@@ -23,10 +23,10 @@ If 4 in [1,2,3,4]: print(“4가 안에 있습니다.”)
 Language = [‘python’,’java’,’c’,’perl’] </br>
 For lang in Language</br>
 If lang in [‘python’,’perl’]:</br>
-	Print(“%6s need interpreter” %lang)</br>
+&nbsp;	Print(“%6s need interpreter” %lang)</br>
 elIf lang in [‘c’,’javascript’]:</br>
  &nbsp; Print(“%6s need comfile”, %lang)</br>
 Else</br>
- Print(“Should not reach here”)</br></br>
+&nbsp; Print(“Should not reach here”)</br></br>
 이 코드를 보면 줄을 잘 맞췄다는 느낌을 받는다. 파이썬의 특징 중 하나는 줄을 맞추지 않으면 에러가 발생한다. 강제적으로 줄을 맞춰서 코드를 작성해야 한다. 이러한 코드의 특징 덕분에 파이썬은 가독성이 좋다
 
