@@ -35,8 +35,8 @@ class Student:
         self.name = name
         self.height = height
     
-    # def __str__(self):
-    #     return 'Student Class Info : {}, {}'.format(self.name,self.height)
+    def __str__(self):
+        return 'Student Class Info : {}, {}'.format(self.name,self.height)
 
     def __ge__(self, x):
         print('Called >> __ge__Method.')
@@ -73,3 +73,47 @@ print("EX2-6 -", s2)
 
 print()
 print()
+
+# 클래스 예제
+
+# 벡터(vectot) # Numpy
+
+class Vector(object):
+    def __init__(self, *args):
+        ''' Create a vector, example : v = Vector(1,2)''' # Vector.__init__.doc -> 문구 출력, 메소드 설명 or 주석 출력
+        if len(args) == 0:
+            self._x, self._y = 0, 0
+        else:
+            self._x,self._y = args
+        
+    def __repr__(self):
+        '''Returns the Vectors Impormation'''
+        return 'Vector(%r, %r)' % (self._x,self._y)
+
+    def __add__(self, other):
+        ''''Returns the vector addition of self and other'''
+        return Vector(self._x + other._x, self._y + other._y)
+        
+    def __mul__(self, y):
+        ''''Returns the vector addition of self and other'''
+        return Vector(self._x * y, self._y * y)
+    
+    def __bool__(self):
+        return bool(max(self._x, self._y))
+
+
+# Vector 인스턴스 생성
+v1 = Vector(3, 5)
+v2 = Vector(15, 20)
+v3 = Vector()
+
+# 매직메소드 출력
+print('EX3 -1 -', Vector.__init__.__doc__)
+print('EX3 -2 -', Vector.__repr__.__doc__)
+print('EX3 -3 -', Vector.__add__.__doc__)
+print('EX3 -4 -', v1,v2,v3)
+print('Ex3 -5 -', v1+v2)
+print('Ex3 -6 -', v1 * 4)
+print('Ex3 -8 -', bool(v1),bool(v2))
+
+
