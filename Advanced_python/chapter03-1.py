@@ -85,3 +85,45 @@ print('EX4-2 -', marks2)
 # 증명
 print('EX4-5 -', [id(i) for i in marks1])
 print('EX4-5 -', [id(i) for i in marks2])
+
+# tuple Advenced
+
+# Packing  &  Unpacking
+
+print('EX5-1 -', divmod(100,9))
+print('EX5-2 -', divmod(*(100,9)))
+print('EX5-3 -', *(divmod(100,9)))
+
+print()
+
+x, y, *rest = range(10)
+print('EX5-4 -', x,y,rest)
+x, y, *rest = range(2)
+print('EX5-5 -', x, y, rest)
+x, y, *rest = 1,2,3,4,5
+print('EX5-6 -', x, y, rest)
+
+print()
+print()
+
+# Mutable(가변) vs Immutable(불변)
+
+l = (10, 15, 20)
+m = [10, 15, 20]
+
+print('EX6-1 -', l, m,id(l),id(m))
+
+
+l = l * 2
+m = m * 2
+# 새로운 객체 생성
+
+print('EX6-2 -', l, m,id(l),id(m))
+
+l *= 2
+m *= 2
+# 재할당
+
+print('EX6-3 -', l, m,id(l),id(m))
+
+# 리스트는 가변, 튜플은 불변
