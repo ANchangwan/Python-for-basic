@@ -117,3 +117,115 @@ print()
 print('EX5-4 -', dir(avg_closure1.__closure__[0]))
 print('EX5-4 -', dir(avg_closure1.__closure__[0].cell_contents))
 
+
+print()
+print()
+
+# 잘못된 클로저 사용 예
+
+def closure_avg2():
+    # free variabel
+    cnt = 0
+    total = 0
+    # 클로저 영역
+    def averager(v):
+        nonlocal cnt,total # 클로져 변수와 내부함수 변수가 같다고 알려주는 명령어
+        cnt+=1 # 초기화되지 않아서 에러뜸
+        total += v
+        print('def2 >>> {} / {}'.format(total, cnt))
+        return total / cnt
+    return averager
+
+# 클로져 영역에 변수와 내부함수영역에 변수는 별개이다.
+
+avg_closure2 = closure_avg2()
+
+print("EX5-5 -", avg_closure2(15))
+print("EX5-6 -", avg_closure2(35))
+print("EX5-7 -", avg_closure2(40))
+
+
+# 데코레이터 실습
+# 1. 중복 제거, 코드 간결
+# 2. 클로저 보다 문법 간결
+# 3. 조합해서 사용 용이
+
+
+# 단점
+# 1. 디버깅 어려움
+# 2. 에러의 모호함
+# 3. 에러 발생 지점 추적 어려움
+
+
+import time
+
+def perf_clock(func):
+    def perf_clocked(*args):
+        # 시작 시간
+        st = time.perf_counter()
+        result = func(*args)
+        # 종료 시간
+        et = time.perf_counter() - st
+        # 함수 명
+        name = func.__name__
+        # 매가변수
+        arg_str = ','.join(repr(arg) for arg in args)
+        # 출력
+        print('result :  [%0.5fs] %s(%s) -> %r' %(et, name, arg_str, result))
+        return result
+    return perf_clocked
+
+@perf_clock
+def time_func(seconds):
+    time.sleep(seconds)
+
+@perf_clock
+def sum_func(*numbers):
+    return sum(numbers)
+
+@perf_clock
+def fact_func(n):
+    return 1 if n < 2 else n * fact_func(n - 1)
+
+# 데코레이터 미사용
+
+# non_deco1 = perf_clock(time_func)
+# non_deco2 = perf_clock(sum_func)
+# non_deco3 = perf_clock(fact_func)
+
+# print("EX7-1 -", non_deco1, non_deco1.__code__.co_freevars)
+# print("EX7-1 -", non_deco2, non_deco2.__code__.co_freevars)
+# print("EX7-1 -", non_deco3, non_deco3.__code__.co_freevars)
+
+# print('*' * 40, 'Called Non deco -> time_func')
+# print('EX7-4 -')
+# non_deco1(2)
+
+# print('*' * 40, 'Called Non deco -> sum_func')
+# print('EX7-5 -')
+# non_deco2(100)
+
+
+# print('*' * 40, 'Called Non deco -> sum_func')
+# print('EX7-6 -')
+# non_deco3(100)
+
+print()
+print()
+print()
+
+print('*' * 40, 'Called deco -> time_func')
+print('EX7-7 -')
+time_func(2)
+
+print('*' * 40, 'Called deco -> sum_func')
+print('EX7-8 -')
+sum_func(10,20,30,40,50)
+
+
+print('*' * 40, 'Called deco -> fact_func')
+print('EX7-9 -')
+fact_func(100)
+
+
+# 데코 사용시 함수 원형으로 사용
