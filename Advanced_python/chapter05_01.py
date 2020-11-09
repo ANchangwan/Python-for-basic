@@ -108,7 +108,7 @@ basket1 =  Basket(['Apple','Bag','TV','Snack','Water'])
 basket2 =  copy.copy(basket1)
 basket3 = copy.deepcopy(basket1)
 
-print('EX5-1 -',id(basket1),id(basket2),id(basket3))                        # 얕은 복사 : 인스턴스의 메모리 변수는 다르게 할당 되지만 클래스 내부의 변수는 할당된 메모리는 변하지 않는다.
+print('EX5-1 -',id(basket1),id(basket2),id(basket3))                        .
 print('EX5-2 -',id(basket1._products),id(basket2._products),id(basket3))
 
 print()
