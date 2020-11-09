@@ -51,10 +51,75 @@ print()
 
 tl1 = [10, [100, 105], (5, 10, 15)]
 tl2 = tl1
-tl3 = list(tl1)
+tl3 = list(tl1) # 새로운 객체를 카피
 
 print('EX4-1 -',tl1 == tl2)
 print('EX4-2 -',tl1 is tl2)
 print('EX4-3 -',tl1 == tl3)
 print('EX4-4 -',tl1 is tl3)
+
+
+# 증명
+
+tl1.append(1000)
+tl1[1].remove(105)
+
+print('EX4-5 -', tl1)
+print('EX4-6 -', tl2)
+print('EX4-7 -', tl3)
+
+print()
+
+
+# print(id(tl1[2]))
+tl1[1] += [110,120]
+tl1[2] += (100,120)
+
+print('EX4-8 -', tl1)
+print('EX4-9 -', tl2) # 튜플 재 할당(객체 새로 생성)
+print('EX4-10 -', tl3)
+# print(id(tl1[2]))
+# 튜플은 새로 생성
+# 리스트 안에 튜플은 넣으면 불안정하다. 변하기 때문
+
+print()
+print()
+
+
+# Deep Copy
+
+# 장바구니
+class Basket:
+    def __init__(self,products=None) -> None:
+        if products is None:
+            self._products = []
+        else:
+            self._products = list(products)
+
+    def put_prod(self, prod_name):
+        self._products.append(prod_name)
+    
+    def del_prod(self, prod_name):
+        self._products.remove(prod_name)
+
+
+import copy
+basket1 =  Basket(['Apple','Bag','TV','Snack','Water'])
+basket2 =  copy.copy(basket1)
+basket3 = copy.deepcopy(basket1)
+
+print('EX5-1 -',id(basket1),id(basket2),id(basket3))                        # 얕은 복사 : 인스턴스의 메모리 변수는 다르게 할당 되지만 클래스 내부의 변수는 할당된 메모리는 변하지 않는다.
+print('EX5-2 -',id(basket1._products),id(basket2._products),id(basket3))
+
+print()
+
+basket1.put_prod('Orange')
+basket2.del_prod('Snack')
+
+print('EX5-3 -',basket1._products)
+print('EX5-4 -',basket2._products)          
+print('EX5-5 -',basket3._products)
+
+# 얕은 복사 : 보이는 데이터타입에 복사, 같은 객체 리스트 참조
+# 깊은 복사 : 참조 레퍼런스 주소까지 복사
 
