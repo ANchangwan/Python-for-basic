@@ -108,8 +108,8 @@ basket1 =  Basket(['Apple','Bag','TV','Snack','Water'])
 basket2 =  copy.copy(basket1)
 basket3 = copy.deepcopy(basket1)
 
-print('EX5-1 -',id(basket1),id(basket2),id(basket3))                        .
-print('EX5-2 -',id(basket1._products),id(basket2._products),id(basket3))
+print('EX5-1 -',id(basket1),id(basket2),id(basket3))                        # 얕은 복사 : 인스턴스의 메모리 변수는 다르게 할당 되지만 클래스 내부의 변수는 할당된 메모리는 변하지 않는다.
+print('EX5-2 -',id(basket1._products),id(basket2._products),id(basket3._products))
 
 print()
 
@@ -123,3 +123,46 @@ print('EX5-5 -',basket3._products)
 # 얕은 복사 : 보이는 데이터타입에 복사, 같은 객체 리스트 참조
 # 깊은 복사 : 참조 레퍼런스 주소까지 복사
 
+# 함수 매개변수 전달 사용 법
+
+def mul(x, y):
+    x += y
+    return x
+
+x = 10
+y = 5
+
+print("EX6-1 -", mul(x,y), x, y)
+print()
+
+a = [10,100]
+b = [5, 10]
+
+
+print('EX6-2 -',mul(a,b),a,b) # 가변형 a -> 데이터 변경
+
+c = (10, 100)
+d = (5, 10)
+
+print("EX6-2 -", mul(c,d), c, d) # 불번형 c -> 데이터 변경 안됨
+
+# 파이썬 불변형 예외
+# str, bytes, frozenset, Tuple : 사본 생성 x -> 참조 반환
+# 하나의 아이디값으로 통일
+
+tt1 = (1, 2, 3, 4, 5)
+tt2 = tuple(tt1)
+tt3 = tt1[:]
+
+print('EX7-1 -', tt1 is tt2,id(tt1), id(tt2) )
+print('EX7-2 -', tt3 is tt1,id(tt3), id(tt1) )
+
+
+tt4 = (10, 20, 30, 40, 50)
+tt5 = (10, 20, 30, 40, 50)
+ss1 = 'Apple'
+ss2 = 'Apple'
+
+
+print('EX7-3 -', tt4 is tt5, tt4 == tt5, id(tt4), id(tt5))
+print('EX7-4 -', ss1 is ss2, ss1 == ss2, id(ss1), id(ss2))
