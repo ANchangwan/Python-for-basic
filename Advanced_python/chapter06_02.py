@@ -71,7 +71,7 @@ print(c3.send(15))
 print()
 print()
 
-# 데코레이터 패턴
+# 데코레이터  패턴
 
 from functools import wraps
 
