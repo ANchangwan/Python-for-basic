@@ -99,3 +99,140 @@ su = sumer()
 print('EX2-1 -',su.send(100))
 print('EX2-2 -',su.send(40))
 print('EX2-3 -',su.send(60))
+
+
+print()
+print()
+
+# 코루틴 예제3 (예외처리)
+
+class SampleException(Exception):
+    '''설명에 사용할 예외유형'''
+
+
+def coroutine_except():
+    print('>> Coroutione stated.')
+    try:
+        while True:
+            try:
+                x = yield
+            except SampleException:
+                print('-> SampleException handled. Continuing..')
+            else:
+                print('-> coroutine received : {}'.format(x))
+    finally:
+        print('-> coroutine ending')
+
+exe_co = coroutine_except()
+
+print('EX3-1 -', next(exe_co))
+print('EX3-2 -', exe_co.send(10))
+print('EX3-3 -', exe_co.send(100))
+print('EX3-4 -', exe_co.throw(SampleException))
+print('EX3-5 -', exe_co.send(1000))
+print('EX3-6 -', exe_co.close()) # GEN_CLOSED
+# print('EX3-7 -', exe_co.send(100))
+
+
+print()
+print()
+
+# 코루틴 예제4(return)
+
+def averager_re():
+    total =  0.0
+    cnt = 0
+    avg = None
+    while True:
+        term = yield
+        if term is None:
+            break
+        total += term
+        cnt += 1
+        avg = total / cnt
+    return 'Average : {}'.format(avg)
+
+avger2 = averager_re()
+
+next(avger2)
+
+avger2.send(10)
+avger2.send(30)
+avger2.send(50)
+
+
+try:
+    avger2.send(None)
+except StopIteration as e:
+    print('EX4-1 -', e.value)
+
+
+# 코루틴 예제5(yeild from)
+# StopIteration 자동 처리(3.7 -> await)
+# 중첩 코루틴 처리
+
+def gen1():
+    for x in 'AB':
+        yield x
+    for y in range(1, 4):
+        yield y
+
+t1 = gen1()
+
+print('EX5-1 -',next(t1))
+print('EX5-2 -',next(t1))
+print('EX5-3 -',next(t1))
+print('EX5-4 -',next(t1))
+print('EX5-5 -',next(t1))
+# print('EX5-6 -',next(t1))
+
+t2 = gen1()
+
+print('EX5-7 -', list(t2))
+
+print()
+print()
+
+def gen2():                     # gen1과 같은 내용
+    yield from 'AB'
+    yield from range(1, 4)
+
+
+
+t3 = gen2()
+
+print('EX6-1 -',next(t3))
+print('EX6-2 -',next(t3))
+print('EX6-3 -',next(t3))
+print('EX6-4 -',next(t3))
+print('EX6-5 -',next(t3))
+# print('EX6-6 -',next(t1))
+
+t4 = gen2()
+
+print('EX6-7 -', list(t4))
+
+
+print()
+print()
+
+def gen3_sub():
+    print('Sub coroutine')
+    x = yield 10
+    print('Recv : ',str(x))
+    x = yield 100
+    print('Recv : ', str(x))
+
+def gen4_main():
+    yield from gen3_sub()
+
+t5 = gen4_main()
+
+print('EX7-1 -',next(t5))
+print('EX7-2 -',t5.send(7))
+print('EX7-2 -',t5.send(77))
+
+
+
+
+
