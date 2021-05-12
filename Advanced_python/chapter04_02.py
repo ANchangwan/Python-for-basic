@@ -1,5 +1,5 @@
 # Chapter04-2
-# 파이썬 심화
+# 파이썬 심화 
 # 일급 함수(일급 객체)
 # 파이썬 함수 특징
 # Decorator & Closure
